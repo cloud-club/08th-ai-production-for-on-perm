@@ -1,0 +1,32 @@
+[project]
+name = "personal-facenet"
+version = "0.1.0"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+  "numpy>=1.26",
+  "pillow>=10.0",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+# 실행용(둘 중 하나만 선택해서 설치)
+cpu = ["onnxruntime>=1.19"]
+gpu = ["onnxruntime-gpu>=1.19"]
+
+# export_onnx_models.py(변환) 할 때만
+export = [
+  "onnx>=1.19.0",
+  "facenet-pytorch==2.6.0",
+  "torch>=2.2,<2.3",
+  "torchvision>=0.17,<0.18",
+  "pillow>=10.2,<10.3",
+]
+
+[tool.uv]
+# cpu/gpu 같이 설치되는 걸 방지(선택형)
+conflicts = [
+  [
+    { extra = "cpu" },
+    { extra = "gpu" },
+  ],
+]
